@@ -1,0 +1,884 @@
+﻿<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <link href="css/Header.css" rel="stylesheet" />
+    <script src="js/store.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/cart.css">
+    <link rel="stylesheet" type="text/css" href="styles/cart_responsive.css">
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/styleStore.css" rel="stylesheet" />
+    <title></title>
+    <meta charset="utf-8" />
+    <style>
+        .icon-size {
+            font-size: 3em;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <script>
+
+        $('.total-cart').html("99.96");
+
+        $('.total-count').html("99.96");
+        //$('.CartItem').html("33");
+        //$('.add-to-cart').click(function (event) {  //Click add  Item
+
+        //    event.preventDefault();
+        //    console.log("-------cart button-------------");
+        //    var name = $(this).attr("data-name");
+
+        //    var qty = 1;
+        //    var price = Number($(this).attr("data-price"));
+
+        //    console.log(name);
+        //    console.log(price);
+        //    addItemToCart(name, price, 1);
+        //   // savecart();
+        //    displayCart();
+
+        //});
+
+        function Add1() {
+
+            var name = document.getElementById("PN1").textContent;
+            var price = document.getElementById("PP1").textContent;
+
+            var qty = 1;
+            addItemToCart(name, price, qty);
+            displayCart();
+        }
+
+        function Add2() {
+
+            var name = document.getElementById("PN2").textContent;
+            var price = document.getElementById("PP2").textContent;
+
+            var qty = 1;
+            addItemToCart(name, price, qty);
+            displayCart();
+        }
+        function Add3() {
+
+            var name = document.getElementById("PN3").textContent;
+            var price = document.getElementById("PP3").textContent;
+
+            var qty = 1;
+            addItemToCart(name, price, qty);
+            displayCart();
+        }
+
+        function clearCartAll() {
+            console.log('----------clear  ----------');
+            clearCart();
+            displayCart();
+        }
+
+
+        function cartAll() {
+            console.log("cart All");
+            var cartArray = listCart();
+            console.log(listCart());
+
+            console.log("Count Array :" + cartArray.length);
+            var output = "";
+            for (var i in cartArray) {
+                output += "<li>" + cartArray[i].name
+                     + "  	&nbsp	&nbsp	&nbsp  &nbsp	&nbsp	&nbsp &nbsp	&nbsp	&nbsp  &nbsp &nbsp	&nbsp	&nbsp &nbsp	&nbsp	&nbsp &nbsp  &nbsp &nbsp	&nbsp	&nbsp &nbsp	" + cartArray[i].count
+                     + "  &nbsp	&nbsp	&nbsp  &nbsp	&nbsp  &nbsp	&nbsp &nbsp	&nbsp " + cartArray[i].price
+                     + " &nbsp	&nbsp	&nbsp  &nbsp	&nbsp  &nbsp	&nbsp &nbsp	&nbsp " + cartArray[i].total
+                     //+ "<button class='btn btn-danger' data-name='" + cartArray[i].name + "'  > Remove </button>"
+                     + "</li>";
+
+                //output += "<li>" + cartArray[i].name
+                //    + "  	&nbsp	&nbsp	&nbsp  &nbsp	&nbsp	&nbsp &nbsp	&nbsp	&nbsp  &nbsp &nbsp	&nbsp	 	" + cartArray[i].count
+                //    + "  &nbsp	&nbsp	&nbsp  &nbsp	&nbsp  &nbsp	&nbsp &nbsp	&nbsp" + cartArray[i].price
+                //    + " &nbsp	&nbsp	&nbsp  &nbsp  &nbsp	&nbsp &nbsp	&nbsp	" + cartArray[i].total
+                //    + "&nbsp &nbsp	&nbsp" + "<button class='delete-item' data-name='" + cartArray[i].name + "'  >   x </button>"
+                //    + "</li>";
+
+
+
+
+        //        var cartRowContents +='
+        //<div class="cart-item cart-column">
+        //    <img class="cart-item-image" src="${imageSrc}" width="100" height="100">
+        //    <span class="cart-item-title">${title}</span>
+        //</div>
+        //<span class="cart-price cart-column">${price}</span>
+        //<div class="cart-quantity cart-column">
+        //    <input class="cart-quantity-input" type="number" value="1">
+        //    <button class="btn btn-danger" type="button">REMOVE</button>
+        //</div>'
+        //        cartRow.innerHTML = cartRowContents
+        //        cartItems.append(cartRow)
+        //        cartRow.getElementsByClassName('btn-danger')[0].addEventListener('click', removeCartItem)
+        //        cartRow.getElementsByClassName('cart-quantity-input')[0].addEventListener('change', quantityChanged)
+
+                //output += "<div class=cart-item cart-column>" + ""
+                //       + "<span class=cart-item-title>" + " " + cartArray[i].name
+                //       +"</span>"
+                //       + "</div>";
+
+                ////console.log(output);
+                //console.log('dynamic cart display1');
+                //    addItemToCart(cartArray[i].name, cartArray[i].price, '');
+                //console.log('dynamic cart display2');
+            }
+
+            $("#show-cart").html(output);
+        }
+
+
+        function addItemToCart(title, price, imageSrc) {
+
+            console.log('dynamic cart display3');
+
+            var cartRow = document.createElement('div')
+            cartRow.classList.add('cart-row')
+            var cartItems = document.getElementsByClassName('cart-items')[0]
+            var cartItemNames = cartItems.getElementsByClassName('cart-item-title')
+            //for (var i = 0; i < cartItemNames.length; i++) {
+            //    if (cartItemNames[i].innerText == title) {
+            //        alert('This item is already added to the cart')
+            //        return
+            //    }
+            //}
+            var cartRowContents = `
+        <div class="cart-item cart-column">
+            <img class="cart-item-image" src="${imageSrc}" width="100" height="100">
+            <span class="cart-item-title">${title}</span>
+        </div>
+        <span class="cart-price cart-column">${price}</span>
+        <div class="cart-quantity cart-column">
+            <input class="cart-quantity-input" type="number" value="1">
+            <button class="btn btn-danger" type="button">REMOVE</button>
+        </div>`
+            cartRow.innerHTML = cartRowContents
+            cartItems.append(cartRow)
+            cartRow.getElementsByClassName('btn-danger')[0].addEventListener('click', removeCartItem)
+            cartRow.getElementsByClassName('cart-quantity-input')[0].addEventListener('change', quantityChanged)
+            console.log('cartRowContents');
+            console.log(cartRowContents);
+            //$("#show-cart").html(cartRowContents);
+        }
+
+        displayCart();
+        function displayCart() {
+
+            console.log("-------Cart Display-------------");
+
+            var cartArray = listCart();
+            console.log(listCart());
+
+            console.log("Count Array :"+cartArray.length);
+            var output = "";
+            for (var i in cartArray) {
+                output += "<li>" + cartArray[i].name
+                       + " " + cartArray[i].count
+                       + " x " + cartArray[i].price
+                       + " = " + cartArray[i].total
+                       //+ "<button class='delete-item' data-name='" + cartArray[i].name + "'  >   x </button>"
+                       + "</li>";
+            }
+
+            $("#show-cart").html(output);
+            $("#total-cart").html(totalCart);
+            $("#total-count").html(countCart);
+        }
+
+        $("#show-cart").on("click", ".delete-item", function (event) {
+            var name = $(this).attr("data-name");
+            console.log(name);
+            RmoveAllItemFromCart(name);
+            displayCart();
+        });
+
+
+
+        var cart = [];
+        var Item = function (name, price, count) {
+            this.name = name
+            this.price = price
+            this.count = count
+        };
+
+        function addItemToCart(name, price, count) {
+
+            for (var i in cart) {
+
+                if (cart[i].name === name) {
+                    cart[i].count += count;
+                    return;
+                }
+            }
+
+            var item = new Item(name, price, count);
+            console.log("-------Addtocart-start------------");
+            console.log(item);
+            cart.push(item);
+            console.log("-------After Push------------");
+            console.log(cart);
+            savecart();
+        }
+
+        function RmoveItemFromCart(name) {
+            for (var i in cart) {
+                if (cart[i].name === name) {
+                    cart[i].count--;
+                    if (cart[i].count === 0) {
+                        cart.splice(i, 1);
+                    }
+
+                    break;
+                }
+
+            }
+
+            savecart();
+        }
+
+        function RmoveAllItemFromCart(name) {///remove All Item
+            for (var i in cart) {
+                if (cart[i].name === name) {
+                    cart.splice(i, 1);
+                    break;
+                }
+
+            }
+            savecart();
+        }
+
+        //addItemToCart("Apple", 11, 2);
+        //addItemToCart("gava", 22, 1);
+
+        function clearCart() {//clear Cart
+            cart = [];
+            savecart();
+        }
+        //console.log('afterclear');
+        //console.log(cart);
+        //console.log(cart[0]);
+        //console.log(cart[0].name);
+
+        function countCart() { //-> return total Count
+            var totalCount = 0;
+            console.log(' total CountLOPPcount');
+            console.log(cart);
+            for (var i in cart) {
+                totalCount += cart[i].count;
+                console.log('LOPPcount');
+                console.log(totalCount);
+            }
+              return totalCount;
+
+        }
+        console.log('----countCart()-----');
+        console.log( countCart() );
+
+        function totalCart() {//-> return total Cost
+            var totalCost = 0;
+            for (var i in cart) {
+                totalCost += cart[i].price * cart[i].count;
+            }
+            return totalCost;
+
+        }
+        console.log('----totalCart()-----');
+        console.log( totalCart() );
+
+        function listCart() { //array of Item
+            var cartCopy = [];
+            for (var i in cart) {
+                var item = cart[i];
+                var itemCopy = {};
+                for (var p in item) {
+                    itemCopy[p] = item[p];
+                }
+                itemCopy.total = (item.price * item.count).toFixed(2);
+                cartCopy.push(itemCopy);
+            }
+            return cartCopy;
+
+        }
+        console.log("listCart()");
+        console.log(listCart());
+
+        function savecart() {
+            console.log('saving ');
+            console.log(cart);
+            localStorage.setItem('shopingCart', JSON.stringify(cart))
+            console.log(localStorage.getItem('shopingCart'));
+        }
+
+        function loadCart() {
+            console.log('Load cart ');
+            cart = JSON.parse(localStorage.getItem("shopingCart"));
+           /// JSON.parse(localStorage.getItem('shopingCart'));
+        }
+
+        //loadCart();
+        // displayCart();
+        //var array=loadCart();
+        //console.log(array);
+
+    </script>
+
+    <div class="container">
+        <!--<div class="flex3 viewBlock">
+            <div class="sortBlock">
+                <h2 class="pHeading">All Investment Options</h2>
+                <div class="flexResponsive520">
+                    <div class="flex1 order2 fixCartBox">
+                        <div class="cartBtn" ng-click="onViewCartSummary()">
+                            <span class="cartCount">0</span>
+                            <span class="iconCart"></span> View summary
+                        </div>
+                        <div class="textalignright mobiletextalignleft marginbtm10">
+                            <div class="txtBtn clearCart" ng-click="onClearAllCart()">Clear cart</div>
+                        </div>
+                    </div>
+                    <div class="flex3 order1 searchBox">
+                        <input type="text" name="search" class="searchField ng-pristine ng-valid ng-empty ng-touched" ng-model="filterObj.searchIssuerName" placeholder="Search by issuer name" ng-change="onSearchTextChange()">
+                        <div align="center">
+                            <input type="text" name="search" id="search" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="sortOption flex flexAlignItemsBaseline">
+                    <div class="title">Sort by:</div>
+                    <div class="sortItem active desc" id="sortByReturn" ng-click="onSortItems('sortByReturn')">Return</div>
+                    <div class="sortItem" id="sortByTenure" ng-click="onSortItems('sortByTenure')">Tenure</div>
+                    <div class="sortItem" id="sortByRating" ng-click="onSortItems('sortByRating')">Rating</div>
+                </div>
+            </div>
+            <div class="itemCountInfo">
+                Showing
+                <span class="ng-binding">14 out of total 87</span> instruments
+            </div>
+
+        </div>-->
+
+        <h3>Financial Product</h3>
+
+        <!--<div class="textalignright" id="show-cart">Cart <span>(0)</span></div>-->
+        <!--<p>
+            Shopping-cart icon on a styled link button                                   :
+            <a href="#" class="btn btn-info btn-lg">
+                <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
+            </a>
+        </p>-->
+        <input type="text" name="search" placeholder="Search by Issuer.."> 
+        <div class="flex1 order2 fixCartBox" >
+            <div class="show-cart1" id="show-cart2" onclick="cartAll()" data-toggle="collapse" data-target="#myModalcart">
+
+
+                <!-- Modal -->
+                <div id="myModalcart" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <!--<h4 class="modal-title" >Cart Display</h4>-->
+                            </div>
+                            <div class="modal-body">
+                                <!--<section class="container content-section">-->
+                                <h2 class="section-header">CART</h2>
+                                <div class="cart-row">
+                                    <span class="cart-item cart-header cart-column">ITEM</span>
+
+                                    <span class="cart-quantity cart-header cart-column">QTY</span>
+                                    <span class="cart-price cart-header cart-column">PRICE</span>
+                                    <span class="cart-price cart-header cart-column">TOTAL</span>
+                                    <!--<span class="cart-price cart-header cart-column">Action</span>-->
+                                </div>
+                                <div class="cart-items">
+                                    <ul id="show-cart">
+                                        <li>???????</li>
+                                    </ul>
+                                </div>
+                                <div class="cart-total">
+                                    <strong class="cart-total-title">Total</strong>
+                                    <span class="cart-total-price" id="total-cart">$0</span>
+                                </div>
+                                <!--<button class="btn btn-primary btn-purchase"  type="button">PURCHASE</button>-->
+                                <!--</section>-->
+                                <!--<div>Total Cart : <span id="total-cart"> </span></div>-->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <a href="#" >
+                    <!--<span class="glyphicon glyphicon-shopping-cart" id="total-cart" >(0)</span>-->
+                    <span class="glyphicon glyphicon-shopping-cart icon-size" id="total-count" >(0)</span>
+                </a>
+
+            </div>
+            <div class="textalignright mobiletextalignleft marginbtm10">
+                <!--<div class="txtBtn clearCart" ng-click="onClearAllCart()">Clear cart</div>-->
+                <a href="#">
+                    <span class="glyphicon glyphicon-star-empty" id="clear-cart" onclick="clearCartAll()">Clear</span>
+                </a>
+            </div>
+        </div>
+        <div class="row" id="SFin">
+            <div class="col-sm-4">
+                <div class="card text-dark bg-warning">
+                    <div class="card-header bg-info text-left text-light"><h4>IDBI</h4></div>
+                    <div class="card-body">
+                        <h5 class="card-title">Service Title</h5>
+
+                        <div class="cardBox">
+                            <div class="cbHead flex flexJustifyBetween flexAlignItemsCenter">
+                                <div class="cbrate ng-binding">AAA CARE</div>
+                            </div>
+                            <div class="cbName ng-binding" id="PN1">IDBI</div>
+                            <div class="cbDesc ng-binding">
+                                Public Sector Unit Bond
+                            </div>
+                            <div class="textalignright">
+                                <!--<div class="cbInfoBtn" ng-click="#myModal1" data-toggle="modal" data-target="#myModal1">
+                                    <span>View details</span>
+                                </div>-->
+                            </div>
+
+                            <table class="cbSpecs">
+                                <tbody>
+                                    <tr>
+                                        <td class="ng-binding">Yield to maturity</td>
+                                        <td><span style="font-size: 20px" class="ng-binding" align="right">6.47</span>%</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100" class="ng-binding">Purchase price</td>
+                                        <td width="100" class="ng-binding" align="right" id="PP1">877</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ng-binding">Maturity date</td>
+                                        <td class="ng-binding" align="right">22-Jan-2020</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ng-binding">Payment frequency</td>
+
+                                        <td class="ng-binding" align="right">Yearly</td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                    <div class="card-footer bg-info text-right text-danger">
+                        <a href="#" class="btn btn-outline-light btn-sm" data-toggle="modal" data-target="#myModal1">View Details</a> <a href="#" class="btn btn-outline-light btn-sm" onclick="Add1()" id="cart_button1">Add To Cart</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card text-dark bg-warning">
+                    <div class="card-header bg-info text-left text-light"><h4>ICIC</h4></div>
+                    <div class="card-body ">
+                        <h5 class="card-title">Services Title</h5>
+                        <div class="cardBox">
+                            <div class="cbHead flex flexJustifyBetween flexAlignItemsCenter">
+                                <div class="cbrate ng-binding">AAA CARE</div>
+                            </div>
+                            <div class="cbName ng-binding" id="PN2">ICIC</div>
+                            <div class="cbDesc ng-binding">
+                                Public Sector Unit Bond
+                            </div>
+                            <div class="textalignright">
+                                <!--<div class="cbInfoBtn" ng-click="openCBInfoPop(item)">
+                                    <span>View details</span>
+                                </div>-->
+                            </div>
+                            <table class="cbSpecs">
+                                <tbody>
+                                    <tr>
+                                        <td class="ng-binding">Yield to maturity</td>
+                                        <td><span style="font-size: 20px" class="ng-binding">10.7</span>%</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100" class="ng-binding">Purchase price</td>
+                                        <td width="100" class="ng-binding" id="PP2">780</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ng-binding">Maturity date</td>
+                                        <td class="ng-binding">22-Jan-2019</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ng-binding">Payment frequency</td>
+                                        <td class="ng-binding">Monthly</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-info text-right text-danger">
+                        <a href="#" class="btn btn-outline-light btn-sm" data-toggle="modal" data-target="#myModal2">View Details</a> <a href="#" class="btn btn-outline-light btn-sm" onclick="Add2()" id="cart_button">Add To Cart</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card text-dark bg-warning">
+                    <div class="card-header bg-info text-left text-light"><h4>PNB</h4></div>
+                    <div class="card-body ">
+                        <h5 class="card-title">Services Title</h5>
+                        <div class="cardBox">
+                            <div class="cbHead flex flexJustifyBetween flexAlignItemsCenter">
+                                <div class="cbrate ng-binding">AAA CARE</div>
+                            </div>
+                            <div class="cbName ng-binding" id="PN3">PNB</div>
+                            <div class="cbDesc ng-binding">
+                                Public Sector Unit Bond
+                            </div>
+                            <div class="textalignright">
+                                <!--<div class="cbInfoBtn" ng-click="openCBInfoPop(item)">
+                                    <span>View details</span>
+                                </div>-->
+                            </div>
+                            <table class="cbSpecs">
+                                <tbody>
+                                    <tr>
+                                        <td class="ng-binding">Yield to maturity</td>
+                                        <td><span style="font-size: 20px" class="ng-binding">6.47</span>%</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100" class="ng-binding">Purchase price</td>
+                                        <td width="100" class="ng-binding" id="PP3">291</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ng-binding">Maturity date</td>
+                                        <td class="ng-binding">22-Jan-2028</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ng-binding">Payment frequency</td>
+                                        <td class="ng-binding">Yearly</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-info text-right text-danger">
+                        <a href="#" class="btn btn-outline-light btn-sm" data-toggle="modal" data-target="#myModal3">View Details</a> <a href="#" class="btn btn-outline-light btn-sm" onclick="Add3()" id="cart_button">Add To Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+     <!--////Modal form 1-->
+    <div class="modal fade" id="myModal1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">IDBI</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Issuer</a>
+                                </h4>
+                            </div>
+                            <div id="collapse1" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <p>IDBI is a deposit-taking housing finance company founded by Mr.Kumar  on 11<sup>th</sup> April, 1984.</p>
+                                    <p>It was established to enable access to affordable housing finance to lower and middle income groups in semi-urban and rural parts of the country.</p>
+                                    <p>It is the second housing finance company to be established in India</p>
+                                    <p>Headquarters: Mumbai, Maharashtra</p>
+                                    <p>Number of Branches: 181</p>
+                                    <p>Number of Service Centres: 146</p>
+                                    <p>Overseas Representative office: 2 (London and Dubai)</p>
+                                    <p>Number of Employees: 2,118</p>
+                                    <p>Net Income: INR 927 Cr</p>
+                                    <p>Total Assets: INR 78,385 Cr</p>
+                                    <p>It is among the top 50 financial companies in India</p>
+                                    <p>The current Chairman and Managing Director is Mr. Kapil Wadhawan</p>
+                                    <p>Awards:</p>
+                                    <ul>
+                                        <li>Global Greentech Award for Technology Excellence in HR</li>
+                                        <li>FM Stars of the Industry award for Excellence in Home Loan Banking (2015)</li>
+                                        <li>Golden Peacock Innovative Product and Service Award</li>
+                                        <li>Realty Plus Newsmaker of the Year (2011)</li>
+                                    </ul>
+                                    <p>-As of 2017</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Issue details</a>
+                                </h4>
+                            </div>
+                            <div id="collapse2" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <p id="infoPopIssueDesc"><p>Coupon: 11.20%&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Maturity: 22-Nov-2022&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rating: AAA BWR&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Type: Unsecured Sub-Debt</p>
+                                    <p>&nbsp;</p></p>
+                                    <!--<a href="{{getInfoPopIssueProspectusPath()}}" class="greenBtn marginbtm30">Prospectus pdf</a>-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Payment details</a>
+                                </h4>
+                            </div>
+                            <div id="collapse3" class="panel-collapse collapse">
+                                <div class="panel-body">
+
+
+                                    <!--<div class="flex flexAlignItemsCenter">
+                                        <div class="customSpin">
+                                            <input type="number" id="infoPopInvestAmt" min="1060475.34" step="1060475.34" value="0" class="investAmnt"><div class="customSpin-nav"><div class="customSpin-button customSpin-up"></div><div class="customSpin-button customSpin-down"></div></div>
+                                        </div>
+                                        <div class="applyAction calcCardInvestement disableBtn">Apply</div>
+                                    </div>-->
+                                    <div class="errorMsg withGreyBg margintop20" style="display: none;">Please enter a valid amount between 50000 and 70000</div>
+                                    <div class="rateTable">
+                                        <table>
+                                            <thead>
+                                                <tr ng-show="showCfHeaderRow">
+                                                    <th width="50"></th>
+                                                    <th width="180">Payment schedule</th>
+                                                    <th width="180" class="ng-binding">Interest payment</th>
+                                                    <th width="180">Redemption amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody><tr><td>1</td><td>01-Apr-2019</td><td>112000.00</td><td></td></tr><tr><td>2</td><td>01-Apr-2020</td><td>112000.00</td><td></td></tr><tr><td>3</td><td>01-Apr-2021</td><td>112000.00</td><td></td></tr><tr><td>4</td><td>01-Apr-2022</td><td>112000.00</td><td></td></tr><tr><td>5</td><td>Maturity date<br><b>22-Nov-2022</b></td><td></td><td><b>Rs. 1072109.59</b>&nbsp;(A)</td></tr><tr><td></td><td>Total interest payment (B)</td><td colspan="2" class="blue"><b>Rs. 448000.00</b></td></tr><tr><td></td><td>Net cash back (A+B)</td><td colspan="2" class="blue"><b>Rs. 1520109.59</b></td></tr><tr><td></td><td>Average monthly payment</td><td colspan="2" class="blue"><b>Rs. 9333.33</b> </td></tr></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--////Modal form 2-->
+    <div class="modal fade" id="myModal2">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">ICIC</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Issuer</a>
+                                </h4>
+                            </div>
+                            <div id="collapse1" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <p>ICIC is a deposit-taking housing finance company founded by Mr. ABC  on 11<sup>th</sup> April, 1984.</p>
+                                    <p>It was established to enable access to affordable housing finance to lower and middle income groups in semi-urban and rural parts of the country.</p>
+                                    <p>It is the second housing finance company to be established in India</p>
+                                    <p>Headquarters: Mumbai, Maharashtra</p>
+                                    <p>Number of Branches: 181</p>
+                                    <p>Number of Service Centres: 146</p>
+                                    <p>Overseas Representative office: 2 (London and Dubai)</p>
+                                    <p>Number of Employees: 2,118</p>
+                                    <p>Net Income: INR 927 Cr</p>
+                                    <p>Total Assets: INR 78,385 Cr</p>
+                                    <p>It is among the top 50 financial companies in India</p>
+                                    <p>The current Chairman and Managing Director is Mr. Kapil Wadhawan</p>
+                                    <p>Awards:</p>
+                                    <ul>
+                                        <li>Global Greentech Award for Technology Excellence in HR</li>
+                                        <li>FM Stars of the Industry award for Excellence in Home Loan Banking (2015)</li>
+                                        <li>Golden Peacock Innovative Product and Service Award</li>
+                                        <li>Realty Plus Newsmaker of the Year (2011)</li>
+                                    </ul>
+                                    <p>-As of 2017</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Issue details</a>
+                                </h4>
+                            </div>
+                            <div id="collapse2" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <p id="infoPopIssueDesc"><p>Coupon: 11.20%&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Maturity: 22-Nov-2022&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rating: AAA BWR&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Type: Unsecured Sub-Debt</p>
+                                    <p>&nbsp;</p></p>
+                                    <!--<a href="{{getInfoPopIssueProspectusPath()}}" class="greenBtn marginbtm30">Prospectus pdf</a>-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Payment details</a>
+                                </h4>
+                            </div>
+                            <div id="collapse3" class="panel-collapse collapse">
+                                <div class="panel-body">
+
+
+                                    <!--<div class="flex flexAlignItemsCenter">
+                                        <div class="customSpin">
+                                            <input type="number" id="infoPopInvestAmt" min="1060475.34" step="1060475.34" value="0" class="investAmnt"><div class="customSpin-nav"><div class="customSpin-button customSpin-up"></div><div class="customSpin-button customSpin-down"></div></div>
+                                        </div>
+                                        <div class="applyAction calcCardInvestement disableBtn">Apply</div>
+                                    </div>-->
+                                    <div class="errorMsg withGreyBg margintop20" style="display: none;">Please enter a valid amount between 50000 and 70000</div>
+                                    <div class="rateTable">
+                                        <table>
+                                            <thead>
+                                                <tr ng-show="showCfHeaderRow">
+                                                    <th width="50"></th>
+                                                    <th width="180">Payment schedule</th>
+                                                    <th width="180" class="ng-binding">Interest payment</th>
+                                                    <th width="180">Redemption amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody><tr><td>1</td><td>01-Apr-2019</td><td>112000.00</td><td></td></tr><tr><td>2</td><td>01-Apr-2020</td><td>112000.00</td><td></td></tr><tr><td>3</td><td>01-Apr-2021</td><td>112000.00</td><td></td></tr><tr><td>4</td><td>01-Apr-2022</td><td>112000.00</td><td></td></tr><tr><td>5</td><td>Maturity date<br><b>22-Nov-2022</b></td><td></td><td><b>Rs. 1072109.59</b>&nbsp;(A)</td></tr><tr><td></td><td>Total interest payment (B)</td><td colspan="2" class="blue"><b>Rs. 448000.00</b></td></tr><tr><td></td><td>Net cash back (A+B)</td><td colspan="2" class="blue"><b>Rs. 1520109.59</b></td></tr><tr><td></td><td>Average monthly payment</td><td colspan="2" class="blue"><b>Rs. 9333.33</b> </td></tr></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--////Modal form 3-->
+    <div class="modal fade" id="myModal3">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">PNB</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Issuer</a>
+                                </h4>
+                            </div>
+                            <div id="collapse1" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <p>PNB is a deposit-taking housing finance company founded by Mr. XYZ  on 11<sup>th</sup> April, 1984.</p>
+                                    <p>It was established to enable access to affordable housing finance to lower and middle income groups in semi-urban and rural parts of the country.</p>
+                                    <p>It is the second housing finance company to be established in India</p>
+                                    <p>Headquarters: Mumbai, Maharashtra</p>
+                                    <p>Number of Branches: 181</p>
+                                    <p>Number of Service Centres: 146</p>
+                                    <p>Overseas Representative office: 2 (London and Dubai)</p>
+                                    <p>Number of Employees: 2,118</p>
+                                    <p>Net Income: INR 927 Cr</p>
+                                    <p>Total Assets: INR 78,385 Cr</p>
+                                    <p>It is among the top 50 financial companies in India</p>
+                                    <p>The current Chairman and Managing Director is Mr. Kapil Wadhawan</p>
+                                    <p>Awards:</p>
+                                    <ul>
+                                        <li>Global Greentech Award for Technology Excellence in HR</li>
+                                        <li>FM Stars of the Industry award for Excellence in Home Loan Banking (2015)</li>
+                                        <li>Golden Peacock Innovative Product and Service Award</li>
+                                        <li>Realty Plus Newsmaker of the Year (2011)</li>
+                                    </ul>
+                                    <p>-As of 2017</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Issue details</a>
+                                </h4>
+                            </div>
+                            <div id="collapse2" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <p id="infoPopIssueDesc"><p>Coupon: 11.20%&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Maturity: 22-Nov-2022&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rating: AAA BWR&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Type: Unsecured Sub-Debt</p>
+                                    <p>&nbsp;</p></p>
+                                    <!--<a href="{{getInfoPopIssueProspectusPath()}}" class="greenBtn marginbtm30">Prospectus pdf</a>-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Payment details</a>
+                                </h4>
+                            </div>
+                            <div id="collapse3" class="panel-collapse collapse">
+                                <div class="panel-body">
+
+
+                                    <!--<div class="flex flexAlignItemsCenter">
+                                        <div class="customSpin">
+                                            <input type="number" id="infoPopInvestAmt" min="1060475.34" step="1060475.34" value="0" class="investAmnt"><div class="customSpin-nav"><div class="customSpin-button customSpin-up"></div><div class="customSpin-button customSpin-down"></div></div>
+                                        </div>
+                                        <div class="applyAction calcCardInvestement disableBtn">Apply</div>
+                                    </div>-->
+                                    <div class="errorMsg withGreyBg margintop20" style="display: none;">Please enter a valid amount between 50000 and 70000</div>
+                                    <div class="rateTable">
+                                        <table>
+                                            <thead>
+                                                <tr ng-show="showCfHeaderRow">
+                                                    <th width="50"></th>
+                                                    <th width="180">Payment schedule</th>
+                                                    <th width="180" class="ng-binding">Interest payment</th>
+                                                    <th width="180">Redemption amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody><tr><td>1</td><td>01-Apr-2019</td><td>112000.00</td><td></td></tr><tr><td>2</td><td>01-Apr-2020</td><td>112000.00</td><td></td></tr><tr><td>3</td><td>01-Apr-2021</td><td>112000.00</td><td></td></tr><tr><td>4</td><td>01-Apr-2022</td><td>112000.00</td><td></td></tr><tr><td>5</td><td>Maturity date<br><b>22-Nov-2022</b></td><td></td><td><b>Rs. 1072109.59</b>&nbsp;(A)</td></tr><tr><td></td><td>Total interest payment (B)</td><td colspan="2" class="blue"><b>Rs. 448000.00</b></td></tr><tr><td></td><td>Net cash back (A+B)</td><td colspan="2" class="blue"><b>Rs. 1520109.59</b></td></tr><tr><td></td><td>Average monthly payment</td><td colspan="2" class="blue"><b>Rs. 9333.33</b> </td></tr></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
